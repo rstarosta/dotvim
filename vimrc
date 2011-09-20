@@ -27,6 +27,10 @@ set ignorecase
 set smartcase
 set nohlsearch
 
+" Don't beep
+set visualbell
+set t_vb=
+
 " Keeps cursor in middle when scrolling 
 set scrolloff=999
 
@@ -158,14 +162,11 @@ let g:SuperTabDefaultCompletionType = "context"
 "let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 
 " Default color scheme
-color desert
+color xoria256
 
 " Directories for swp files
 set backupdir=~/.vim/backup
 set directory=~/.vim/backup
-
-" Turn off jslint errors by default
-let g:JSLintHighlightErrorLine = 0
 
 " % to bounce from do to end etc.
 "runtime! macros/matchit.vim
@@ -181,20 +182,6 @@ endif
 "Rspec stuff
 autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 
-"Autoformat tables
-inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
-
-function! s:align()
-  let p = '^\s*|\s.*\s|\s*$'
-  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
-    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
-    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
-    Tabularize/|/l1
-    normal! 0
-    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
-  endif
-endfunction
-
 function! <SID>StripTrailingWhitespaces()
 	" preparation: save last search and cursor position.
 	let _s=@/
@@ -209,5 +196,4 @@ endfunction
 
 nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
 
-"cd /home/radix/Dropbox/
 au VimEnter *  NERDTree
