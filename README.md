@@ -8,8 +8,9 @@ git clone git://github.com/Anadol/dotvim.git .vim
 cd .vim
 git submodule init
 git submodule update
-ln -s vimrc ../.vimrc
-ln -s gvimrc ../.gvimrc
-cd bundle/command-t
+cd ..
+ln -s .vim/vimrc .vimrc
+ln -s .vim/gvimrc .gvimrc
+cd .vim/bundle/command-t
 rake make # requires ruby
 ```
